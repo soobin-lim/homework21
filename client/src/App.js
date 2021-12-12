@@ -1,27 +1,22 @@
-import React from "react";
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import SearchBooks from './pages/SearchBooks';
+import SavedBooks from './pages/SavedBooks';
+import Navbar from './components/Navbar';
 
-// We use Route in order to define the different routes of our application
-import { Route } from "react-router-dom";
-
-// We import all the components we need in our app
-import Navbar from "./components/navbar";
-import Edit from "./components/edit";
-import Create from "./components/create";
-import RecordList from "./components/recordList";
-
-const App = () => {
+function App() {
   return (
-    <div>
-      <Navbar />
-      <Route exact path="/">
-        <RecordList />
-      </Route>
-      <Route path="/edit/:id" component={Edit} />
-      <Route path="/create">
-        <Create />
-      </Route>
-    </div>
+    <Router>
+      <>
+        <Navbar />
+        <Switch>
+          <Route exact path='/' component={SearchBooks} />
+          <Route exact path='/saved' component={SavedBooks} />
+          <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
+        </Switch>
+      </>
+    </Router>
   );
-};
+}
 
 export default App;
